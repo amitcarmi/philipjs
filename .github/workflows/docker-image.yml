@@ -14,5 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag philipjs:$(date +%s)
+    - name: Build and push the Docker image
+      run: |
+        tag = date +%s
+        docker build . --file Dockerfile --tag philipjs:$(tag)
+        docker tag philipjs:$(tag) amitcarmi/philipjs
+        docker push amitcarmi/philipjs
